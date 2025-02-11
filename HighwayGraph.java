@@ -260,25 +260,39 @@ public class HighwayGraph
     Edge shortestE = g.vertices[0].head;
     Edge lngstLabel = g.vertices[0].head;
     Edge shrtstLabel = g.vertices[0].head;
-   
+   int count=0;
+double eLength = 0;
 for (int i = 0; i < g.vertices.length; i++) {
-        Edge curr = g.vertices[i].head;
-        if(curr.length > longestE.length){
-            longestE = curr;
-        }
-        if(curr.length < shortestE.length){
-            shortestE = curr;
-        }
-        if(curr.label.length() > lngstLabel.label.length()){
-            lngstLabel = curr;
-        }
-        if(curr.label.length() < shrtstLabel.label.length()){
-            shrtstLabel = curr;
-        }
+
+    Edge curr = g.vertices[i].head;
+    
+    while(curr != null){
+        
+    if(curr.dest > i){
+        count++;
+        eLength += curr.length;
+    if(curr.length > longestE.length){
+        longestE = curr;
     }
-    System.out.println("Longest Edge: " + longestE.label);
-    System.out.println("Shortest Edge: " + shortestE.label);
-    System.out.println("Longest Label: " + lngstLabel.label);
-    System.out.println("Shortest Label: " + shrtstLabel.label);
+    if(curr.length < shortestE.length){
+        shortestE = curr;
+    }
+    if(curr.label.length() > lngstLabel.label.length()){
+        lngstLabel = curr;
+    }
+    if(curr.label.length() < shrtstLabel.label.length()){
+        shrtstLabel = curr;
+    }
+}
+    curr = curr.next;
+}
+}
+System.out.println("Longest Edge: " + longestE.label);
+System.out.println("Shortest Edge: " + shortestE.label);
+System.out.println("Longest Label: " + lngstLabel.label);
+System.out.println("Shortest Label: " + shrtstLabel.label);
+System.out.println(count);
+System.out.println(g.numEdges);
+System.out.println("Total edge length: " + eLength);
     }
 }
