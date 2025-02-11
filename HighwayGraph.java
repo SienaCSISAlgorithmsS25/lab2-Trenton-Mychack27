@@ -222,5 +222,63 @@ public class HighwayGraph
         System.out.println(g);
 
 	// ADD CODE HERE TO COMPLETE LAB TASKS
+    Vertex north = g.vertices[0];
+    Vertex south = g.vertices[0];
+    Vertex east = g.vertices[0];
+    Vertex west = g.vertices[0];
+    Vertex longest =g.vertices[0];
+    Vertex shortest = g.vertices[0];
+ 
+    for (int i = 0; i < g.vertices.length; i++) {
+        if(g.vertices[i].point.lat > north.point.lat){
+            north = g.vertices[i];
+        }
+        if(g.vertices[i].point.lng > east.point.lng){
+            east = g.vertices[i];
+        }
+        if(g.vertices[i].point.lat < south.point.lat){
+            south = g.vertices[i];
+        }
+        if(g.vertices[i].point.lng < west.point.lng){
+            west = g.vertices[i];
+        }
+        if(g.vertices[i].label.length() > longest.label.length()){
+            longest = g.vertices[i];
+        }
+        if(g.vertices[i].label.length() < shortest.label.length()){
+            shortest = g.vertices[i];
+        }
+    }
+    System.out.println("North: " + north.label);
+    System.out.println("South: " + south.label);
+    System.out.println("East: " + east.label);
+    System.out.println("West: " + west.label);
+    System.out.println("Longest: " + longest.label);
+    System.out.println("Shortest: " + shortest.label);
+
+    Edge longestE = g.vertices[0].head;
+    Edge shortestE = g.vertices[0].head;
+    Edge lngstLabel = g.vertices[0].head;
+    Edge shrtstLabel = g.vertices[0].head;
+   
+for (int i = 0; i < g.vertices.length; i++) {
+        Edge curr = g.vertices[i].head;
+        if(curr.length > longestE.length){
+            longestE = curr;
+        }
+        if(curr.length < shortestE.length){
+            shortestE = curr;
+        }
+        if(curr.label.length() > lngstLabel.label.length()){
+            lngstLabel = curr;
+        }
+        if(curr.label.length() < shrtstLabel.label.length()){
+            shrtstLabel = curr;
+        }
+    }
+    System.out.println("Longest Edge: " + longestE.label);
+    System.out.println("Shortest Edge: " + shortestE.label);
+    System.out.println("Longest Label: " + lngstLabel.label);
+    System.out.println("Shortest Label: " + shrtstLabel.label);
     }
 }
